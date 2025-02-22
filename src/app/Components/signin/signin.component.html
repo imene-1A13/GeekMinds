@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<app-header></app-header>
+
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit-icons.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('assets/images/login%20form.svg');  
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        .uk-card {
+            background-color: rgba(50, 62, 167, 0.3); 
+            margin: auto;  
+            position: relative;  
+            width: 800px;
+            height: 38vh;  
+            max-width: 90%;  
+            padding: 20px;  }
+
+        .bubble {
+            position: absolute;
+            top: -62px;;
+            left: 593px; 
+            padding: 10px;
+            background-color: #F54564;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .uk-form-stacked {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+        <div class="uk-container">
+            <div class="uk-grid-large uk-child-width-expand@s uk-margin" uk-grid>
+                <div class="uk-width-expand@m">
+                    <div class="uk-card uk-card-default uk-card-body" id="login-form">
+                        <div class="bubble">
+                            <a [routerLink]="['/signup']" class="signup">Sign Up</a>
+                        </div>
+                        <h2 class="uk-text-center"><em><strong>welcome</strong></em></h2>
+                        <form #signinform="ngForm" (ngSubmit)="Signin(signinform)" class="uk-form-stacked">
+                            <div class="uk-margin">
+								<label class="uk-form-label" for="username">Username:</label>
+								<div class="uk-form-controls">
+                                    <input class="uk-input" type="text" id="username" name="username" required [(ngModel)]="username" placeholder="Enter your username">
+                                    <span class="errmsg" style="color: red;" *ngIf="signinform.control.controls['username'].touched && signinform.control.controls['username'].invalid">* Username is required</span>
+
+                                </div>
+							</div>
+							<div class="uk-margin">
+								<label class="uk-form-label" for="password">Password:</label>
+								<div class="uk-form-controls">
+                                    <input class="uk-input" type="password" id="password" name="password" required [(ngModel)]="password" placeholder="Enter your password">
+                                    <span class="errmsg" style="color: red;" *ngIf="signinform.control.controls['password'].touched && signinform.control.controls['password'].invalid">* Password is rereqiured </span> 
+
+                                </div>
+                                <div class="form-group first">
+
+                                    <span class="errmsg" style="color: red;" *ngIf="signinform.submitted && isLoginFailed">Password or username are incorrect</span>
+                                    <span class="errmsg" style="color: rgb(32, 178, 100);"  *ngIf="isLoggedIn"> authenticated successfuly !</span>
+                                    </div>  
+							</div>
+							<button class="uk-button uk-button-danger uk-width-1-1   " type="submit" [disabled]="signinform.invalid">Login</button>
+                            
+                        </form>
+                        <a style="  font-style: italic; font-family:Arial, sans-serif;" href="forgot-password">forget password</a>
+
+                    </div>
+                </div>
+                <div class="uk-width-1-2@m uk-visible@m">
+                </div>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<app-header></app-header>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/css/uikit.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit-icons.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/css/uikit.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.4/js/uikit-icons.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="uk-container">
+    <form id="msform" class="uk-card uk-card-default uk-card-body" id="login-form" (ngSubmit)="register()">
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li *ngFor="let step of steps; let i = index" [class.active]="i === currentStep">{{ step }}</li>
+      </ul>
+      <ng-container *ngFor="let step of steps; let i = index">
+        <fieldset [hidden]="currentStep !== i">
+          <h2 class="fs-title">{{ step }}</h2>
+          <!-- Add form controls for each step -->
+          <ng-container [ngSwitch]="i">
+            <div *ngSwitchCase="0">
+
+              <input type="email" [(ngModel)]="user.email" name="email" placeholder="Email" class="uk-input"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required (blur)="validateField('email')" />
+       <div *ngIf="!user.email && fieldTouched.email" style="color: red;">
+         Email is required.
+       </div>
+       <div *ngIf="user.email && !emailPatternValid && fieldTouched.email" style="color: red;">
+         Please enter a valid email address.
+       </div>
+       
+                     
+      
+       
+              <input type="password" [(ngModel)]="user.password" name="password" placeholder="Password" class="uk-input"
+              required maxlength="8" (blur)="validateField('password')" />
+       <div *ngIf="user.password && user.password.length > 8" style="color: red;">
+         Password should be 8 characters or less.
+       </div>
+       <div *ngIf="!user.password && fieldTouched.password" style="color: red;">
+         Password is required.
+       </div>
+       
+            </div>
+            <div *ngSwitchCase="1">
+              <input type="text" [(ngModel)]="user.lastName" name="lastname" placeholder="Last Name" class="uk-input" required/>
+              <div *ngIf="!user.lastName && fieldTouched.lastName" style="color: red;">
+                lastName is required.
+              </div>
+              <input type="text" [(ngModel)]="user.username"name="username"placeholder="User Name"class="uk-input"required > <!-- Add a template reference variable -->
+
+              <div *ngIf="invalidUsername" style="color: red;">
+                Username is required.
+</div>
+<div *ngIf="!user.username && fieldTouched.username" style="color: red;">
+  Username is required.
+</div>
+              <input type="text" [(ngModel)]="user.phone" name="phone" placeholder="Phone" class="uk-input" required />
+              <div *ngIf="!user.phone && fieldTouched.phone" style="color: red;">
+              required.
+              </div>
+              <input type="date" [(ngModel)]="user.birthdate" name="birthdate" class="uk-input" required/>
+              <div *ngIf="!user.birthdate && fieldTouched.birthdate" style="color: red;">
+            birthdate   required.
+              </div>
+              <select name="gender" [(ngModel)]="user.sex" class="uk-select"  placeholder="User Name" required>
+                <div *ngIf="!user.sex && fieldTouched.sex" style="color: red;">
+               gender required.
+                </div>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <select [(ngModel)]="user.country" name="country" class="uk-select" required>
+                <div *ngIf="!user.country && fieldTouched.country" style="color: red;">
+                Country required.
+                </div>
+                <option value="">Select Country</option>
+                <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+              </select>
+
+
+
+              <input type="text" name="address" [(ngModel)]="user.address" placeholder="Address" class="uk-input" required/>
+              <div *ngIf="!user.address && fieldTouched.address" style="color: red;">
+                address is required.
+              </div>
+            </div>
+            <div *ngSwitchCase="2">
+              <select [(ngModel)]="user.speciality" name="sepciality" class="uk-select" required>
+                <div *ngIf="!user.speciality && fieldTouched.speciality" style="color: red;">
+                  speciality is required.
+                </div>
+                <option value="">Select Speciality</option>
+                <option *ngFor="let speciality of specialities" [value]="speciality">{{ speciality }}</option>
+                
+              </select>
+              <select [(ngModel)]="user.role" name="Role" class="uk-select"required>
+                <div *ngIf="!user.role && fieldTouched.role" style="color: red;">
+                  role is required.
+                </div>
+                <option value="">Select Roles</option>
+                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+              </select>
+              <div *ngIf="user.role === 'TUTOR'">
+                <label for="linkedin">LinkedIn Link:</label>
+                <label for="linkedin">LinkedIn Link:</label>
+  <input type="text" id="linkedin" name="linkedin" [(ngModel)]="user.linkedin" class="uk-input" (change)="validateLinkedIn()">
+  <div *ngIf="invalidLinkedIn" style="color: red;">
+    Please enter a valid LinkedIn link starting with "https://www.linkedin.com/in/".
+  </div>
+                <input type="file" id="cv" name="cv" (change)="onFileSelected($event)" class="uk-input"required>
+                <div class="alert alert-danger" *ngIf="uploadSucess">{{ uploadSucess }}</div>
+
+              </div>
+            </div>
+            <div>            <a href="signin">go back to signup</a>
+            </div>
+
+          </ng-container>
+          <button type="button" *ngIf="!isFirstStep()" (click)="prevStep()"
+            class="previous action-button uk-button uk-button-default">Previous</button>
+            <button type="button" *ngIf="!isLastStep()" (click)="nextStep()"
+            class="next action-button uk-button uk-button-primary" >Next</button>
+    
+    <button type="submit" *ngIf="isLastStep()"
+            class="submit action-button uk-button uk-button-primary" >Submit</button>
+    
+        </fieldset>
+      </ng-container>
+    </form>
+  </div>
+  <div>
+
+    <img src="assets/images/image-1.png" alt="" class="image-1">
+    <img src="assets/images/image-2.png" alt="" class="image-2">
+  </div>
+  <br>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+/* Custom CSS for course cards */
+.course-card {
+    flex-basis: calc(33.33% - 20px); /* Adjust the width of each card as needed */
+    margin: 10px; /* Add margin for spacing between cards */
+  }
+  

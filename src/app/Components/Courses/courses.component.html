@@ -1,0 +1,144 @@
+<head>
+
+
+</head>
+
+
+
+
+
+<body>
+  <app-header></app-header>
+
+  <div class="bg-gray postion-relative">
+
+
+    <div class="container-fluid">
+      <div class="row justify-content-evenly">
+
+        <!-- ================= Timeline ================= -->
+        <div class="col-12">
+          <div class="d-flex flex-column justify-content-center w-100 mx-auto">
+            <div>
+              <app-search (searchEvent)="onSearch($event)"></app-search>
+
+
+            </div>
+            <section class="our-courses" id="courses">
+
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="section-heading">
+                    <h6>OUR COURSES</h6>
+                    <h4>What You Can <em>Learn</em></h4>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="naccs">
+                    <div class="tabs">
+                      <div class="row">
+
+                        <div *ngFor="let course of listcourses" class="col-sm-15 col-lg-15 col-xl-15 course-card">
+                          <div *ngIf="keyword === '' || course.name.toLowerCase().includes(keyword)">
+                            <div class="card border-0 shadow">
+                              <div class="card-body">
+
+                                <img src="data:image/png;base64,{{course.image}}">
+                                <!-- Badge and favorite -->
+                                <div class="d-flex justify-content-between mb-2">
+                                  <span style="font-style: italic;">{{course.domain}}/{{course.category}}</span>
+                                  <span>{{course.publish_date}}</span>
+
+
+                                </div>
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="text-dark">{{course.name}}</a></h5>
+
+                                <p>{{course.description}}</p>
+                                <!-- Rating star -->
+                                <div class="d-flex align-items-center mb-3">
+                                  <ul class="list-inline m-0">
+                                    <ng-container
+                                      *ngFor="let i of [].constructor(calculateStarRating(course).fullStars)">
+                                      <li class="list-inline-item me-1"><i class="fas fa-star text-warning"></i></li>
+                                    </ng-container>
+
+                                    <!-- Display a fractional star if needed -->
+                                    <ng-container *ngIf="calculateStarRating(course).halfStar">
+                                      <li class="list-inline-item me-1">
+                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                      </li>
+                                    </ng-container>
+
+                                    <!-- Display empty stars to fill the remaining space -->
+                                    <ng-container
+                                      *ngFor="let i of [].constructor(5 - calculateStarRating(course).fullStars - (calculateStarRating(course).halfStar ? 1 : 0))">
+                                      <li class="list-inline-item me-1">
+                                        <i class="far fa-star text-warning"></i>
+                                      </li>
+                                    </ng-container>
+                                  </ul>
+                                  <span class="ms-2 fw-light">{{course.ratetotal}}/5.0</span>
+                                </div>
+                                <!-- Duration and lectures -->
+                                <div class="d-flex justify-content-between">
+                                  <span class="text-muted">{{course.duree}} <i
+                                      class="far fa-clock text-danger me-2"></i></span>
+                                  <span class="text-muted">
+                                    <i class="fas fa-user text-orange me-2"></i>{{course.numstudents}} Participants
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="card-footer bg-transparent border-text-mute p-3">
+                                <div class="row row-cols-2">
+                                  <ng-container  *ngIf="course.price === 0; else buyNowTemplate">
+                                    <a (click)="enrollInCourse(course.name)" [routerLink]="['/courses-details', course.name]">View Details</a>
+                                  </ng-container>
+                                  <ng-template #buyNowTemplate>
+                                    <a a (click)="enrollInCourse(course.name)" [routerLink]="['/pay',course.name]">Enroll Now</a>
+                                  </ng-template>
+                                  
+                                  <div class="col-md-4 text-right">
+                                    <h4 class="color-light-red mt-2"><strong>{{course.price}} Dt</strong></h4>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="contact-us" id="contact-section">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div id="map">
+
+                      <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
+                      <div class="row">
+
+
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <iframe></iframe>
+                  <p class="copyright">Copyright © 2023 Node-It , Gassoumi imene, All Rights Reserved.
+
+                </div>
+              </div>
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

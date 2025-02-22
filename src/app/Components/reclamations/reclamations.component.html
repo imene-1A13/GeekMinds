@@ -1,0 +1,52 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <div class="header">    <title>Reclamations Dashboard</title>
+    </div>
+</head>
+<app-header></app-header>
+<body style="margin-top: 100px;">
+    <h2 class="header">Reclamations List</h2>
+
+    <div class="container mt-4">
+
+        <div class="row">
+            <div *ngFor="let reclamation of Listreclams" class="col-sm-6 mb-3">
+                <div class="CustomCard hoverCustomCard">
+                    <div class="CustomCardheader text-white btn-primary">
+                        <h5 class="col pt-2"><strong>{{reclamation.subject}} </strong></h5>
+                    </div>
+                    <div class="info text-center">
+                        <div class="d-flex">
+                            <div>
+                              <p class="m-0 fw-bold">{{reclamation.reclamer.username}}  {{reclamation.reclamer.lastName}}</p>
+    
+                             
+                            </div>
+                          </div>
+                    
+                        <div class="desc">{{reclamation.description}}</div>
+                    </div>
+                    <div class="bottom mx-auto" (click)="alertConfirmation(reclamation.id)">
+                        <a class="btn btn-danger btn-sm ml-2" rel="publisher" >
+                            <i class="fas fa-trash-alt text-white pointer"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+
+

@@ -1,0 +1,249 @@
+<app-header></app-header>
+<body>
+    <div class="split-container">
+        <div class="left-half">
+            <!-- Your existing HTML code here -->
+            <section class="section about-section gray-bg" id="about">
+                <div class="container">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-lg-6">
+                            <div class="about-text go-to">
+                                <h3 class="dark-color">{{course.name}}</h3>
+                                <h6 class="theme-color lead">{{course.domain}} | {{course.category}}</h6>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="about-avatar">
+                                <img src="data:image/png;base64,{{course.image}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <article class="wrapper-2017">
+                        <video src="/assets/img/css-cards/2023-simple-animated-card.mp4" preload="metadata"
+                            loop=""></video>
+                        <div class="info-box">
+                            <div class="about-text go-to">
+                                <h3 class="dark-color">Chapters</h3>
+                                <div>
+                                    <button class="btn btn-primary" (click)="showAddChapterModel()">Add Chapter</button>
+                                </div>
+                            </div>
+
+
+                            <div *ngFor="let chap of chapters" id="aspect-content">
+
+
+                                <div class="aspect-tab ">
+                                    <input id="item-2" type="checkbox" class="aspect-input" name="aspect">
+                                    <label for="item-2" class="aspect-label"></label>
+                                    <div class="aspect-content">
+                                        <div class="aspect-info">
+                                            <div class="chart-pie positive">
+                                                <span class="chart-pie-count">33</span>
+                                                <div>
+                                                    <div class="first-fill"></div>
+                                                    <div class="second-fill" style="transform: rotate(119deg)"></div>
+                                                </div>
+                                            </div>
+                                            <span class="aspect-name">{{chap.title}}</span>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="aspect-tab-content">
+                                        <div class="sentiment-wrapper">
+                                            <div>
+                                                <button class="btn btn-danger"
+                                                    (click)="alertConfirmation(chap.idch)">Delete</button>
+                                            </div>
+                                           
+                                              
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <h3 class="dark-color">Final Assignement </h3>
+                    <button class="btn btn-primary" (click)="showToDoModel()"> Add Assignement</button>
+
+
+
+                </div>
+            </section>
+        </div>
+        <div class="bar-container">
+            <div class="bar"></div>
+        </div>
+        <div class="right-half">
+            <div class="right-half">
+
+                <div class="model" *ngIf="selectedModel === 'todo'">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">Assignement</h2>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+
+
+
+                            </div>
+
+
+                            <div class="modal-body">
+                                <form [formGroup]="AssignementForm">
+                                    <div class="grid grid-cols-1 space-y-2">
+                                        <label class="text-sm font-bold text-gray-500 tracking-wide">Attach detail</label>
+                                        <div class="flex items-center justify-center w-full">
+                                            <label
+                                                class="flex flex-col rounded-lg border-4 border-dashed w-full h-5 p-10 group text-center">
+
+                                                <div
+                                                    class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+
+                                                    <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
+                                                    </div>
+                                                    <img src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
+                                                        alt="freepik image">
+
+                                                    <p class="pointer-none text-gray-500 "><span class="text-sm">Drag
+                                                            and drop</span> files here <br /> or <a href="" id=""
+                                                            class="text-blue-600 hover:underline">select a file</a> from
+                                                        your computer</p>
+                                                </div>
+                                                <input type="file" id="Powerpoint" accept=".ppt, .pptx"
+                                                    (change)="onFilecontentSelected($event)">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="name" name="title"
+                                        formControlName="title">
+                                </div>
+
+                            
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" (click)="addassign()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="model" *ngIf="selectedModel === 'add-chapter'">
+                    <!-- Modal -->
+
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">ADD chapter </h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+
+                            <div class="modal-body">
+
+                                <form [formGroup]="ChapterForm">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="name" name="title"
+                                            formControlName="title">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lastName" class="form-label">Description</label>
+                                        <input type="text" class="form-control" id="details" name="details"
+                                            formControlName="details">
+                                    </div>
+
+
+                                    <div class="grid grid-cols-1 space-y-2">
+                                        <label class="text-sm font-bold text-gray-500 tracking-wide">Attach
+                                            Powerpoint</label>
+                                        <div class="flex items-center justify-center w-full">
+                                            <label
+                                                class="flex flex-col rounded-lg border-4 border-dashed w-full h-5 p-10 group text-center">
+
+                                                <div
+                                                    class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+
+                                                    <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
+                                                    </div>
+                                                    <img src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
+                                                        alt="freepik image">
+
+                                                    <p class="pointer-none text-gray-500 "><span class="text-sm">Drag
+                                                            and drop</span> files here <br /> or <a href="" id=""
+                                                            class="text-blue-600 hover:underline">select a file</a> from
+                                                        your computer</p>
+                                                </div>
+                                                <input type="file" id="Powerpoint" accept=".ppt, .pptx"
+                                                    (change)="onFilecontentSelected($event)">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 space-y-2">
+                                        <label class="text-sm font-bold text-gray-500 tracking-wide">Attach
+                                            video</label>
+                                        <div class="flex items-center justify-center w-full">
+                                            <label
+                                                class="flex flex-col rounded-lg border-4 border-dashed w-full h-5 p-10 group text-center">
+
+                                                <div
+                                                    class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+
+                                                    <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
+                                                    </div>
+                                                    <img src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
+                                                        alt="freepik image">
+
+                                                    <p class="pointer-none text-gray-500 "><span class="text-sm">Drag
+                                                            and drop</span> files here <br /> or <a href="" id=""
+                                                            class="text-blue-600 hover:underline">select a file</a> from
+                                                        your computer</p>
+                                                </div>
+                                                <input type="file" id="Video" accept="video/*"
+                                                    (change)="onFileSelected($event)">
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" (click)="addChapter()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+           
+
+
+        </div>
+    </div>
+</body>
